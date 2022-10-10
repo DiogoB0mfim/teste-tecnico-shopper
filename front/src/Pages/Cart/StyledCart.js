@@ -85,10 +85,10 @@ export const ButtonForm = styled.button`
 
 // Estilização botão de deletar produto
 export const ButtonDelete = styled.button`
-  background-color: #ff0000;
-  color: #ffff;
+  background-color: #ffff;
+  color: #ff0000;
   font-weight: bolder;
-  border: none;
+  border: 1px solid #ff0000;
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
