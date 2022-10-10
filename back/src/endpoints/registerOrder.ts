@@ -8,15 +8,22 @@ export const registerOrder = async (req: Request, res: Response) => {
     const products: Purchase[] = req.body.products;
 
     for (let i = 0; i < products.length; i++) {
-      await connection.raw(`INSERT INTO shopper_purchases
-      VALUES(${Date.now()}, ${products[i].id_product}, ${products[i].qty_product}, "${products[i].date}", "${products[i].customer_name}")`);
-    
-      await connection.raw(`UPDATE shopper_products SET qty_stock = qty_stock - ${products[i].qty_product}
-      WHERE id = ${products[i].id_product}
-      `)
+      // Adicionar compra a tabela de compras
+      await connection("shopper_purchases").insert({
+        id_purchase: Date.now(),
+        id_product: products[i].id_product,
+        qty_product: products[i].qty_product,
+        date: products[i].date,
+        customer_name: products[i].customer_name,
+      });
+
+      // Subtrair item da compra do estoque
+      await connection.raw(`UPDATE shopper_products 
+        SET qty_stock = qty_stock - ${products[i].qty_product} 
+        WHERE id = ${products[i].id_product}`);
     }
 
-    res.status(200).send("Compra feita!");
+    res.status(200).send({ message: "Compra feita!" });
   } catch (error: any) {
     res.status(errorCode).send({ message: error.message });
   }
