@@ -4,14 +4,13 @@ import connection from "../database/connection";
 export const updateOrderProduct = async (req: Request, res: Response) => {
   let errorCode = 400;
   try {
-    const id_purchase = req.body.id
-    const qty_product = req.body.qty_product
+    const idPurchase = req.body.id;
+    const qtyProduct = req.body.qty_product;
 
-    await connection.raw(`
-        UPDATE shopper_purchases SET qty_product = ${qty_product}
-        WHERE id_purchase = ${id_purchase};
-    `)
-    
+    await connection("shopper_purchases")
+      .where("id_purchase", idPurchase)
+      .update({ qty_product: qtyProduct });
+
     res.status(200).send("Quantia modificada!");
   } catch (error: any) {
     res.status(errorCode).send({ message: error.message });
