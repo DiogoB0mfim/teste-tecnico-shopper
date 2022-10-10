@@ -1,8 +1,8 @@
-import { registerOrder } from './endpoints/registerOrder'
-import { showStock } from './endpoints/showStock'
-import { showUserOrder } from './endpoints/showUserOrder'
-import { deleteOrderProduct } from './endpoints/deleteOrderProduct'
-import { updateOrderProduct } from './endpoints/updateOrderProduct'
+import { registerOrder } from './controller/registerOrder'
+import { showStock } from './controller/showStock'
+import { showUserOrder } from './controller/showUserOrder'
+import { deleteOrderProduct } from './controller/deleteOrderProduct'
+import { updateOrderProduct } from './controller/updateOrderProduct'
 import { app } from "./app"
 
 // Endpoint para puxar todo estoque
@@ -18,4 +18,4 @@ app.post("/create-order", registerOrder)
 app.delete("/delete-order-product/:id", deleteOrderProduct)
 
 // Endpoint para mudar a quantidade de um produto em um pedido
-app.put("/update-order-product/", updateOrderProduct)
+app.put("/update-order-product", updateOrderProduct)
