@@ -37,12 +37,13 @@ const GlobalState = (props) => {
       });
   };
 
-  // Requisição de fazer uma compra
+  // Requisição para fazer uma compra
   const postOrder = (formDate, formName) => {
     const body = {
       products: cart.map((product) => {
         return {
           id_product: product.id,
+          name_product: product.name,
           qty_product: product.quantity,
           date: formDate,
           customer_name: formName,
@@ -53,10 +54,45 @@ const GlobalState = (props) => {
     axios
       .post(`${BASE_URL}/create-order`, body)
 
-      .then((response) => {
+      .then(() => {
         alert("Pedido confirmado");
 
         setCart([]);
+      })
+
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  // Requisição para cancelar uma compra
+  const deleteOrder = (id) => {
+    axios
+      .delete(`${BASE_URL}/delete-order-product/${id}`)
+
+      .then(() => {
+        alert("Produto deletado");
+        getUserOrder();
+      })
+
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  // Requisição para atualizar qtd de produtos em uma compra
+  const updateOrder = (id, qtd) => {
+    const body = {
+      id: id,
+      qty_product: qtd,
+    };
+
+    axios
+      .put(`${BASE_URL}/update-order-product`, body)
+
+      .then(() => {
+        alert("Quantidade atualizada");
+        getUserOrder();
       })
 
       .catch((error) => {
@@ -162,6 +198,8 @@ const GlobalState = (props) => {
     getStock,
     postOrder,
     getUserOrder,
+    deleteOrder,
+    updateOrder,
 
     // Funções
     addToCart,
