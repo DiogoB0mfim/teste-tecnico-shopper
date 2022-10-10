@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
+// Estilização container de produtos
 export const productsContainer = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 50px;
 `
+
+// Estilização card do produtos
 export const productCard = styled.div`
     display: flex;
     flex-direction: column;
@@ -17,7 +20,6 @@ export const productCard = styled.div`
 `
 
 export const productImg = styled.img`
-    width: 100%;
     border-radius: 15px;
 `
 
@@ -34,9 +36,10 @@ export const DivPriceQtd = styled.div`
     justify-content: space-between; 
 ` 
 
-export const CarButton = styled.button`
+export const CardButton = styled.button`
     background-color: #00a000;
     color: #ffff;
+    font-weight: bolder;
     border: none;
     padding: 5px;
     border-radius: 5px;
@@ -45,4 +48,13 @@ export const CarButton = styled.button`
     &:hover {
         background-color: #008000;
     }
+`
+
+// Estilização icone carrinho
+export const CartImg = styled.img`
+    width: 48px;
+    position: fixed;
+    top: 10px;
+    right: 50px;
+    cursor: pointer;
 `
