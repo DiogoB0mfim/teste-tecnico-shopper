@@ -1,12 +1,10 @@
 import GlobalStateContext from "../../Global/GlobalStateContext";
+import Header from "../../Components/Header/Header";
 import { useContext, useEffect, useState } from "react";
 import imgProd from "../../Assets/prod-s-img.png";
-import imgCart from "../../Assets/cart-img.png";
 import * as S from "./StyledHome"
-import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const navigate = useNavigate()
   const { stock, getStock, addToCart } = useContext(GlobalStateContext);
   const [qtd, setQtd ] = useState()
 
@@ -31,7 +29,9 @@ const Home = () => {
               onChange={onChangeQtd}
             />
             <S.CardButton 
-              onClick={() => qtd <= item.qty_stock && qtd > 0 ? addToCart(item, qtd) : alert(`Quantidade indisponível, máximo de ${item.qty_stock}UND`)} >Adicionar ao carrinho</S.CardButton>
+              onClick={() => qtd <= item.qty_stock && qtd > 0 
+              ? addToCart(item, qtd) 
+              : alert(`Quantidade indisponível, máximo de ${item.qty_stock}UND`)} >Adicionar ao carrinho</S.CardButton>
           </S.DivPriceQtd>
         </S.productCard>
       );
@@ -39,7 +39,7 @@ const Home = () => {
 
   return (
     <>
-      <S.CartImg src={imgCart} onClick={() => navigate("/cart")} alt="carrinho de compras"/>
+      <Header/>
       <S.productsContainer>
         {productList}
       </S.productsContainer>
