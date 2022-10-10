@@ -1,10 +1,12 @@
 import * as S from "./StyledStock";
 import GlobalStateContext from "../../Global/GlobalStateContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Header from "../../Components/Header/Header";
 
 const Stock = () => {
-  const { stock } = useContext(GlobalStateContext);
+  const { stock, getStock } = useContext(GlobalStateContext);
+
+  useEffect(() => {getStock()})
 
   const stockList = stock && stock.map((item) => {
       return (
