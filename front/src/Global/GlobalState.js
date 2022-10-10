@@ -5,16 +5,31 @@ import GlobalStateContext from "../Global/GlobalStateContext";
 const GlobalState = (props) => {
   const [stock, setStock] = useState();
   const [cart, setCart] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   const BASE_URL = "http://localhost:3003";
 
-  // Requisição de mostrar todo estoque
+  // Requisição para mostrar todo estoque
   const getStock = () => {
     axios
       .get(`${BASE_URL}/stock`)
 
       .then((response) => {
         setStock(response.data.message);
+      })
+
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  // Requisição para mostrar todos pedidos de um cliente
+  const getUserOrder = (userName) => {
+    axios
+      .get(`${BASE_URL}/user-purchases/${userName}`)
+
+      .then((response) => {
+        setOrders(response.data.message);
       })
 
       .catch((error) => {
@@ -40,7 +55,7 @@ const GlobalState = (props) => {
 
       .then((response) => {
         alert("Pedido confirmado");
-        
+
         setCart([]);
       })
 
@@ -141,16 +156,18 @@ const GlobalState = (props) => {
     // Estados
     stock,
     cart,
+    orders,
 
     // Requisições
     getStock,
     postOrder,
+    getUserOrder,
 
     // Funções
     addToCart,
     addMoreProduct,
     removeMoreProduct,
-    removeAllProduct
+    removeAllProduct,
   };
 
   return (
