@@ -14,6 +14,7 @@ const createTables = () => connection.raw(`
       CREATE TABLE IF NOT EXISTS shopper_purchases (
          id_purchase BIGINT PRIMARY KEY,
          id_product INT NOT NULL,
+         name_product VARCHAR(255) NOT NULL,
          qty_product INT NOT NULL,
          date DATETIME NOT NULL,
          customer_name VARCHAR(255) NOT NULL,
