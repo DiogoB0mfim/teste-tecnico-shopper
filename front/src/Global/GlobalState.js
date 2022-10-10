@@ -40,6 +40,7 @@ const GlobalState = (props) => {
 
       .then((response) => {
         alert("Pedido confirmado");
+        
         setCart([]);
       })
 

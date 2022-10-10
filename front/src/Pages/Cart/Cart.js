@@ -1,11 +1,10 @@
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import * as S from "./StyledCart.js";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import imgprod from "../../Assets/prod-s-img.png";
+import Header from "../../Components/Header/Header";
 
 const Cart = () => {
-  const navigate = useNavigate();
   const { cart, addMoreProduct, removeMoreProduct, postOrder, removeAllProduct } = useContext(GlobalStateContext);
   const [formName, setFormName] = useState("");
   const [formDate, setFormDate] = useState("");
@@ -47,8 +46,9 @@ const Cart = () => {
     });
 
   return (
+    <>
+    <Header/>
     <S.DivCart>
-        <S.ButtonHome onClick={() => navigate("/")}>Home</S.ButtonHome>
         <S.FormCart>
             <h2>Pedido</h2>
             <S.FormInput
@@ -71,6 +71,7 @@ const Cart = () => {
             {cartList}
         </S.ContainerCart>
     </S.DivCart>
+    </>
   );
 };
 
