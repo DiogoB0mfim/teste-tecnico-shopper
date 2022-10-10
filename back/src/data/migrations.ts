@@ -1,5 +1,5 @@
 import connection from "./connection";
-import products from "./products.json";
+import products from "./json/products.json";
 
 const printError = (error: any) => { console.log(error.sqlMessage || error.message) }
 

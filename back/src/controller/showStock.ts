@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import connection from "../database/connection";
+import connection from "../data/connection";
 
 export const showStock = async (req: Request, res: Response) => {
   let errorCode = 400;
