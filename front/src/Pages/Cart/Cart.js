@@ -1,21 +1,13 @@
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import * as S from "./StyledCart.js";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import imgprod from "../../Assets/prod-s-img.png";
 import Header from "../../Components/Header/Header";
+import useForm from "../../Hooks/useForm";
 
 const Cart = () => {
   const { cart, addMoreProduct, removeMoreProduct, postOrder, removeAllProduct } = useContext(GlobalStateContext);
-  const [formName, setFormName] = useState("");
-  const [formDate, setFormDate] = useState("");
-
-  const onChangeName = (event) => {
-    setFormName(event.target.value);
-  };
-
-  const onChangeDate = (event) => {
-    setFormDate(event.target.value);
-  };
+  const [form, onChange] = useForm({ name: "", date: "" });
 
   const sumTotalCart = () => {
     let cartTotalPrice = 0
@@ -38,8 +30,7 @@ const Cart = () => {
                 <S.ProductInfo><b>Qtd:</b> {item.quantity}UND</S.ProductInfo>
                 <S.ButtonQtd onClick={() => addMoreProduct(item)}>+</S.ButtonQtd>
                 <S.ButtonDelete onClick={() => removeAllProduct(item)}>Deletar todos</S.ButtonDelete>
-            </S.ContainerQtd>
-            
+            </S.ContainerQtd> 
           </div>
         </S.ProductCard>
       );
@@ -54,17 +45,17 @@ const Cart = () => {
             <S.FormInput
             placeholder="Digite seu nome"
             required
-            onChange={onChangeName}
-            value={formName}
+            onChange={onChange}
+            name="name"
             />
             <S.FormInput
             type="date"
             placeholder="Agende a data"
-            onChange={onChangeDate}
-            value={formDate}
+            onChange={onChange}
+            name="date"
             />
             <S.ProductInfo><b>Total:</b> R${sumTotalCart()}</S.ProductInfo>
-            <S.ButtonForm onClick={() => postOrder(formDate, formName)}>Confirmar pedido</S.ButtonForm>
+            <S.ButtonForm onClick={() => postOrder(form.date, form.name)}>Confirmar pedido</S.ButtonForm>
         </S.FormCart>
         
         <S.ContainerCart>

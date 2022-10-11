@@ -1,19 +1,16 @@
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import Header from "../../Components/Header/Header";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import imgProd from "../../Assets/prod-s-img.png";
 import * as S from "./StyledHome"
+import useForm from "../../Hooks/useForm";
 
 const Home = () => {
-  const { stock, getStock, addToCart } = useContext(GlobalStateContext);
-  const [qtd, setQtd ] = useState()
+  const { stock, getStock, addToCart, alertError } = useContext(GlobalStateContext);
+  const [form, onChange] = useForm({ qtd: "" });
 
   useEffect(() => {getStock()});
 
-  const onChangeQtd = (event) => {
-    setQtd(event.target.value)
-  }
-   
   const productList = stock && stock.map((item) => {
       return (
         <S.productCard key={item.id}>
@@ -26,12 +23,13 @@ const Home = () => {
               min="1" 
               max={item.qty_stock} 
               placeholder="Quantidade" 
-              onChange={onChangeQtd}
+              onChange={onChange}
+              name="qtd"
             />
             <S.CardButton 
-              onClick={() => qtd <= item.qty_stock && qtd > 0 
-              ? addToCart(item, qtd) 
-              : alert(`Quantidade indisponível, máximo de ${item.qty_stock}UND`)} >Adicionar ao carrinho</S.CardButton>
+              onClick={() => form.qtd <= item.qty_stock && form.qtd  > 0 
+              ? addToCart(item, form.qtd ) 
+              : alertError(`Máximo de ${item.qty_stock}UND`)} >Adicionar ao carrinho</S.CardButton>
           </S.DivPriceQtd>
         </S.productCard>
       );
@@ -43,8 +41,7 @@ const Home = () => {
       <S.productsContainer>
         {productList}
       </S.productsContainer>
-    </>
-    
+    </> 
   )
 };
 
