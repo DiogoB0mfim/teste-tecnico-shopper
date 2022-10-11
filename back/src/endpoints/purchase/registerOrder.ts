@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import connection from "../data/connection";
-import { Purchase } from "../models/purchase";
+import connection from "../../data/connection";
+import { Purchase } from "../../models/purchase";
 
 export const registerOrder = async (req: Request, res: Response) => {
   let errorCode = 400;

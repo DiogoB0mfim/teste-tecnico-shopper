@@ -1,8 +1,8 @@
-import { registerOrder } from './controller/registerOrder'
-import { showStock } from './controller/showStock'
-import { showUserOrder } from './controller/showUserOrder'
-import { deleteOrderProduct } from './controller/deleteOrderProduct'
-import { updateOrderProduct } from './controller/updateOrderProduct'
+import { registerOrder } from './endpoints/purchase/registerOrder'
+import { showStock } from './endpoints/stock/showStock'
+import { showUserOrder } from './endpoints/purchase/showUserOrder'
+import { deleteOrderProduct } from './endpoints/purchase/deleteOrderProduct'
+import { updateOrderProduct } from './endpoints/purchase/updateOrderProduct'
 import { app } from "./app"
 
 // Endpoint para puxar todo estoque
