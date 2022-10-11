@@ -15,6 +15,11 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
     font-family: 'Courier New', Courier, monospace;
   }
+
+  .toast-message {
+    font-size: 1.2rem;
+  }
+  
 `;
 
 export default GlobalStyle;

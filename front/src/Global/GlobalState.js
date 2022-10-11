@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import GlobalStateContext from "../Global/GlobalStateContext";
+import { toast } from "react-toastify";
 
 const GlobalState = (props) => {
   const [stock, setStock] = useState();
@@ -9,95 +10,25 @@ const GlobalState = (props) => {
 
   const BASE_URL = "http://localhost:3003";
 
-  // Requisição para mostrar todo estoque
-  const getStock = () => {
-    axios
-      .get(`${BASE_URL}/stock`)
-
-      .then((response) => {
-        setStock(response.data.message);
-      })
-
-      .catch((error) => {
-        console.log(error.message);
-      });
+  // Função para setar alert
+  const alertSuccess = (message) => {
+    toast.success(`${message}`, {
+      position: "top-right",
+      className: "toast-message",
+      autoClose: 2000,
+      closeOnClick: true,
+      draggable: true,
+    });
   };
 
-  // Requisição para mostrar todos pedidos de um cliente
-  const getUserOrder = (userName) => {
-    axios
-      .get(`${BASE_URL}/user-purchases/${userName}`)
-
-      .then((response) => {
-        setOrders(response.data.message);
-      })
-
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
-
-  // Requisição para fazer uma compra
-  const postOrder = (formDate, formName) => {
-    const body = {
-      products: cart.map((product) => {
-        return {
-          id_product: product.id,
-          name_product: product.name,
-          qty_product: product.quantity,
-          date: formDate,
-          customer_name: formName,
-        };
-      }),
-    };
-
-    axios
-      .post(`${BASE_URL}/create-order`, body)
-
-      .then(() => {
-        alert("Pedido confirmado");
-
-        setCart([]);
-      })
-
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
-
-  // Requisição para cancelar uma compra
-  const deleteOrder = (id) => {
-    axios
-      .delete(`${BASE_URL}/delete-order-product/${id}`)
-
-      .then(() => {
-        alert("Produto deletado");
-        getUserOrder();
-      })
-
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
-
-  // Requisição para atualizar qtd de produtos em uma compra
-  const updateOrder = (id, qtd) => {
-    const body = {
-      id: id,
-      qty_product: qtd,
-    };
-
-    axios
-      .put(`${BASE_URL}/update-order-product`, body)
-
-      .then(() => {
-        alert("Quantidade atualizada");
-        getUserOrder();
-      })
-
-      .catch((error) => {
-        console.log(error.message);
-      });
+  const alertError = (message) => {
+    toast.error(`${message}`, {
+      position: "top-right",
+      className: "toast-message",
+      autoClose: 2000,
+      closeOnClick: true,
+      draggable: true,
+    });
   };
 
   // Função de adicionar ao carrinho
@@ -118,7 +49,7 @@ const GlobalState = (props) => {
       const newCart = [...cart, setProduct];
       setCart(newCart);
       // Setando alert na tela
-      alert("adicionado");
+      alertSuccess("Produto adicionado! 😀");
     }
   };
 
@@ -188,6 +119,97 @@ const GlobalState = (props) => {
     setCart(newCart);
   };
 
+  // Requisição para mostrar todo estoque
+  const getStock = () => {
+    axios
+      .get(`${BASE_URL}/stock`)
+
+      .then((response) => {
+        setStock(response.data.message);
+      })
+
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  // Requisição para mostrar todos pedidos de um cliente
+  const getUserOrder = (userName) => {
+    axios
+      .get(`${BASE_URL}/user-purchases/${userName}`)
+
+      .then((response) => {
+        setOrders(response.data.message);
+      })
+
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  // Requisição para fazer uma compra
+  const postOrder = (formDate, formName) => {
+    const body = {
+      products: cart.map((product) => {
+        return {
+          id_product: product.id,
+          name_product: product.name,
+          qty_product: product.quantity,
+          date: formDate,
+          customer_name: formName,
+        };
+      }),
+    };
+
+    axios
+      .post(`${BASE_URL}/create-order`, body)
+
+      .then(() => {
+        alertSuccess("Pedido confirmado!");
+
+        setCart([]);
+      })
+
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  // Requisição para cancelar uma compra
+  const deleteOrder = (id) => {
+    axios
+      .delete(`${BASE_URL}/delete-order-product/${id}`)
+
+      .then(() => {
+        alertSuccess("Produto deletado!");
+        getUserOrder();
+      })
+
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  // Requisição para atualizar qtd de produtos em uma compra
+  const updateOrder = (id, qtd) => {
+    const body = {
+      id: id,
+      qty_product: qtd,
+    };
+
+    axios
+      .put(`${BASE_URL}/update-order-product`, body)
+
+      .then(() => {
+        alertSuccess("Quantidade atualizada!");
+        getUserOrder();
+      })
+
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   const data = {
     // Estados
     stock,
@@ -202,6 +224,8 @@ const GlobalState = (props) => {
     updateOrder,
 
     // Funções
+    alertSuccess,
+    alertError,
     addToCart,
     addMoreProduct,
     removeMoreProduct,
