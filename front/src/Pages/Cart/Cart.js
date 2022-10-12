@@ -1,22 +1,15 @@
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import * as S from "./StyledCart.js";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import imgprod from "../../Assets/prod-s-img.png";
 import Header from "../../Components/Header/Header";
 import useForm from "../../Hooks/useForm";
 
 const Cart = () => {
-  const { cart, addMoreProduct, removeMoreProduct, postOrder, removeAllProduct } = useContext(GlobalStateContext);
+  const { cart, addMoreProduct, removeMoreProduct, postOrder, removeAllProduct, cartTotalPrice, sumTotalCart } = useContext(GlobalStateContext);
   const [form, onChange] = useForm({ name: "", date: "" });
 
-  const sumTotalCart = () => {
-    let cartTotalPrice = 0
-    
-    for (let item of cart) {
-        cartTotalPrice += (item.price * item.quantity)
-    }
-    return cartTotalPrice.toFixed(2).replace(".", ",")
-  }
+  useEffect(() => {sumTotalCart()})
 
   const cartList = cart && cart.map((item) => {
       return (
@@ -54,7 +47,7 @@ const Cart = () => {
             onChange={onChange}
             name="date"
             />
-            <S.ProductInfo><b>Total:</b> R${sumTotalCart()}</S.ProductInfo>
+            <S.ProductInfo><b>Total:</b> R${cartTotalPrice.toFixed(2).replace(".", ",")}</S.ProductInfo>
             <S.ButtonForm onClick={() => postOrder(form.date, form.name)}>Confirmar pedido</S.ButtonForm>
         </S.FormCart>
         
