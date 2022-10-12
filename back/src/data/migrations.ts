@@ -16,6 +16,7 @@ const createTables = () => connection.raw(`
          id_product INT NOT NULL,
          name_product VARCHAR(255) NOT NULL,
          qty_product INT NOT NULL,
+         tot_price DECIMAL (8,2) NOT NULL,
          date DATETIME NOT NULL,
          customer_name VARCHAR(255) NOT NULL,
          FOREIGN KEY (id_product) REFERENCES shopper_products(id)

@@ -14,6 +14,7 @@ export const registerOrder = async (req: Request, res: Response) => {
         id_product: products[i].id_product,
         name_product: products[i].name_product,
         qty_product: products[i].qty_product,
+        tot_price: products[i].tot_price,
         date: products[i].date,
         customer_name: products[i].customer_name,
       });
