@@ -44,7 +44,7 @@
   
 * Clonar o repositório
   
-* Rodar `npm run install`;
+* Rodar `npm run install`
   
 * Criar um arquivo `.env` na pasta raiz do projeto:
   
