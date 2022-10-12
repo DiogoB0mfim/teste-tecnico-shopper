@@ -14,6 +14,7 @@ const Orders = () => {
           <p><b>Id da compra:</b> {item.id_purchase}</p>
           <p><b>Produto:</b> {item.name_product}</p>
           <p><b>Qtd do produto:</b> {item.qty_product}</p>
+          <p><b>Preço total:</b> R${item.tot_price.toFixed(2).replace(".", ",")}</p>
           <p><b>Comprador:</b> {item.customer_name}</p>
           <S.ContainerAttQtd>
             <input
