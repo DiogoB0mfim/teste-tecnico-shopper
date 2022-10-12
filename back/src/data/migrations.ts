@@ -1,9 +1,14 @@
 import connection from "./connection";
 import products from "./json/products.json";
 
-const printError = (error: any) => { console.log(error.sqlMessage || error.message) }
+const printError = (error: any) => {
+  console.log(error.sqlMessage || error.message);
+};
 
-const createTables = () => connection.raw(`
+const createTables = () =>
+  connection
+    .raw(
+      `
       CREATE TABLE IF NOT EXISTS shopper_products (
          id INT PRIMARY KEY,
          name VARCHAR(255) NOT NULL,
@@ -21,18 +26,24 @@ const createTables = () => connection.raw(`
          customer_name VARCHAR(255) NOT NULL,
          FOREIGN KEY (id_product) REFERENCES shopper_products(id)
       );
-`)
+`
+    )
 
-   .then(() => { console.log("Tabelas criadas") })
-   .catch(printError)
+    .then(() => {
+      console.log("Tabelas criadas");
+    })
+    .catch(printError);
 
-const insertProducts = () => connection("shopper_products")
-   .insert(products)
-   .then(() => { console.log("Produtos criados") })
-   .catch(printError)
+const insertProducts = () =>
+  connection("shopper_products")
+    .insert(products)
+    .then(() => {
+      console.log("Produtos criados");
+    })
+    .catch(printError);
 
-const closeConnection = () => { connection.destroy() }
+const closeConnection = () => {
+  connection.destroy();
+};
 
-createTables()
-   .then(insertProducts)
-   .finally(closeConnection)
+createTables().then(insertProducts).finally(closeConnection);
