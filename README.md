@@ -56,6 +56,8 @@
    DB_SCHEMA =  
 ```
 
-* Rodar `npm run migrations para criar todas as tabelas`
+* Rodar `npm run migrations` para criar todas as tabelas
+
+* Rodar `npm run start` para ligar o servidor
 
 
