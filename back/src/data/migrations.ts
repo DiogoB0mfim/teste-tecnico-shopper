@@ -11,13 +11,13 @@ const createTables = () => connection.raw(`
          qty_stock BIGINT NOT NULL
       );
       
-      CREATE TABLE IF NOT EXISTS shopper_purchases (
+      CREATE TABLE IF NOT EXISTS shopper_purchases(
          id_purchase BIGINT PRIMARY KEY,
          id_product INT NOT NULL,
          name_product VARCHAR(255) NOT NULL,
          qty_product INT NOT NULL,
-         tot_price DECIMAL (8,2) NOT NULL,
          date DATETIME NOT NULL,
+         tot_price DECIMAL (8,2) NOT NULL,
          customer_name VARCHAR(255) NOT NULL,
          FOREIGN KEY (id_product) REFERENCES shopper_products(id)
       );
