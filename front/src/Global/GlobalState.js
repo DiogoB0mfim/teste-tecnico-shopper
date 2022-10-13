@@ -166,7 +166,7 @@ const GlobalState = (props) => {
           id_product: product.id,
           name_product: product.name,
           qty_product: product.quantity,
-          tot_price: cartTotalPrice,
+          tot_price: product.price * product.quantity,
           date: formDate,
           customer_name: formName,
         };
