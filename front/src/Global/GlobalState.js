@@ -7,7 +7,7 @@ const GlobalState = (props) => {
   const [stock, setStock] = useState();
   const [cart, setCart] = useState([]);
   const [orders, setOrders] = useState([]);
-  const [cartTotalPrice, setCartTotalPrice] = useState(0)
+  const [cartTotalPrice, setCartTotalPrice] = useState(0);
 
   const BASE_URL = "http://localhost:3003";
 
@@ -166,7 +166,7 @@ const GlobalState = (props) => {
           id_product: product.id,
           name_product: product.name,
           qty_product: product.quantity,
-          tot_price: cartTotalPrice,
+          tot_price: product.price * product.quantity,
           date: formDate,
           customer_name: formName,
         };
