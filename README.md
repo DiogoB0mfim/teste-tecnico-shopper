@@ -44,7 +44,7 @@
   
 * Clonar o repositório
   
-* Rodar `npm run install`
+* Rodar `npm install`
   
 * Criar um arquivo `.env` na pasta raiz do projeto:
   
@@ -58,6 +58,6 @@
 
 * Rodar `npm run migrations` para criar todas as tabelas
 
-* Rodar `npm run start` para ligar o servidor
+* Rodar `npm start` para ligar o servidor
 
 
