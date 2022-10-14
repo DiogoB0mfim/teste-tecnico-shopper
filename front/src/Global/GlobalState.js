@@ -147,7 +147,7 @@ const GlobalState = (props) => {
   // Requisição para mostrar todos pedidos de um cliente
   const getUserOrder = (userName) => {
     axios
-      .get(`${BASE_URL}/user-purchases/${userName}`)
+      .get(`${BASE_URL}/purchase/user-purchases/${userName}`)
 
       .then((response) => {
         setOrders(response.data.message);
@@ -174,7 +174,7 @@ const GlobalState = (props) => {
     };
 
     axios
-      .post(`${BASE_URL}/create-order`, body)
+      .post(`${BASE_URL}/purchase/create-purchase`, body)
 
       .then(() => {
         alertSuccess("Pedido confirmado!");
@@ -190,7 +190,7 @@ const GlobalState = (props) => {
   // Requisição para cancelar uma compra
   const deleteOrder = (id) => {
     axios
-      .delete(`${BASE_URL}/delete-order-product/${id}`)
+      .delete(`${BASE_URL}/purchase/delete-purchase-product/${id}`)
 
       .then(() => {
         alertSuccess("Produto deletado!");
@@ -210,7 +210,7 @@ const GlobalState = (props) => {
     };
 
     axios
-      .put(`${BASE_URL}/update-order-product`, body)
+      .put(`${BASE_URL}/purchase/update-purchase-product`, body)
 
       .then(() => {
         alertSuccess("Quantidade atualizada!");
