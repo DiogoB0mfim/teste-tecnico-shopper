@@ -53,7 +53,7 @@
    DB_HOST = 
    DB_USER = 
    DB_PASSWORD = 
-   DB_SCHEMA =  
+   DB_DATABASE = 
 ```
 
 * Rodar `npm run migrations` para criar todas as tabelas
