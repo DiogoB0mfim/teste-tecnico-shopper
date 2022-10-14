@@ -133,7 +133,7 @@ const GlobalState = (props) => {
   // Requisição para mostrar todo estoque
   const getStock = () => {
     axios
-      .get(`${BASE_URL}/stock`)
+      .get(`${BASE_URL}/stock/products`)
 
       .then((response) => {
         setStock(response.data.message);
