@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PurchaseBusiness } from "../business/PurchaseBusiness";
-import { Purchase } from "../models/Purchase";
+import { Purchase } from "../models/purchase";
 
 const purchaseBusiness = new PurchaseBusiness();
 

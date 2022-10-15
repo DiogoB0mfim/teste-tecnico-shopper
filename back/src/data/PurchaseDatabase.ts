@@ -1,5 +1,5 @@
 import BaseDatabase from "./BaseDatabase";
-import { Purchase } from "../models/Purchase";
+import { Purchase } from "../models/purchase";
 
 export class PurchaseDatabase extends BaseDatabase {
   public async getUserPurchase(userName: string) {
