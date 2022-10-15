@@ -23,7 +23,7 @@ export class PurchaseBusiness {
   }
 
   async updatePurchaseProduct(idPurchase: number, qtyProduct: number) {
-    if (!idPurchase || !qtyProduct) {
+    if (!idPurchase || !qtyProduct || qtyProduct === 0) {
       throw new Error("Insira as informações corretamente");
     } else {
       const purchaseDatabase = new PurchaseDatabase();

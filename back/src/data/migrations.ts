@@ -1,6 +1,5 @@
 import BaseDatabase from "./BaseDatabase";
 import products from "./json/products.json";
-
 export class Migrations extends BaseDatabase {
   public async createTables() {
     await BaseDatabase.connection.raw(`
