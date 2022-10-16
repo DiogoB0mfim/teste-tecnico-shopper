@@ -40,7 +40,7 @@ export class PurchaseDatabase extends BaseDatabase {
       .select("qty_stock")
       .where("id", idAndQtyProd[0].id_product);
 
-    // Se o valor de produtos autalizado for maior que o valor já armazenado
+    // Se o valor de produtos atualizado for maior que o valor já armazenado
     if (qtyProduct > idAndQtyProd[0].qty_product) {
       await BaseDatabase.connection("shopper_products")
         .where("id", idAndQtyProd[0].id_product)
