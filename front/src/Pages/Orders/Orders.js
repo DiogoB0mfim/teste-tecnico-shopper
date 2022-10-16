@@ -5,8 +5,8 @@ import GlobalStateContext from "../../Global/GlobalStateContext";
 import useForm from "../../Hooks/useForm";
 
 const Orders = () => {
-  const { orders, getUserOrder, deleteOrder, updateOrder } = useContext(GlobalStateContext);
-  const [form, onChange] = useForm({ name: "", quantity: "" });
+  const { orders, getUserOrder, deleteOrder, updateOrder, alertError } = useContext(GlobalStateContext);
+  const [form, onChange] = useForm({ name: "", qtd: "" });
 
   const ordersList = orders && orders.map((item) => {
       return (
@@ -14,15 +14,14 @@ const Orders = () => {
           <p><b>Id da compra:</b> {item.id_purchase}</p>
           <p><b>Produto:</b> {item.name_product}</p>
           <p><b>Qtd do produto:</b> {item.qty_product}</p>
-          <p><b>Preço total:</b> R${item.tot_price.toFixed(2).replace(".", ",")}</p>
           <p><b>Comprador:</b> {item.customer_name}</p>
           <S.ContainerAttQtd>
             <input
               placeholder="Nova quantidade"
-              name="quantity"
+              name="qtd"
               onChange={onChange}
             />
-            <S.ButtonAtt onClick={() => updateOrder(item.id_purchase, form.quantity)}>Atualizar</S.ButtonAtt>
+            <S.ButtonAtt onClick={() => form.qtd > 0 ? updateOrder(item.id_purchase, form.qtd) : alertError("Quantidade igual a 0")}>Atualizar</S.ButtonAtt>
           </S.ContainerAttQtd>
           <div>
             <S.ButtonCancel onClick={() => deleteOrder(item.id_purchase)}>Cancelar pedido</S.ButtonCancel>
