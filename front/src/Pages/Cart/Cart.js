@@ -34,7 +34,7 @@ const Cart = () => {
     <Header/>
     <S.DivCart>
         <S.FormCart>
-            <h2>Pedido</h2>
+            <h2>Carrinho</h2>
             <S.FormInput
             placeholder="Digite seu nome"
             required
@@ -50,7 +50,6 @@ const Cart = () => {
             <S.ProductInfo><b>Total:</b> R${cartTotalPrice.toFixed(2).replace(".", ",")}</S.ProductInfo>
             <S.ButtonForm onClick={() => postOrder(form.date, form.name)}>Confirmar pedido</S.ButtonForm>
         </S.FormCart>
-        
         <S.ContainerCart>
             {cartList}
         </S.ContainerCart>
