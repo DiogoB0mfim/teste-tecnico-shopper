@@ -49,7 +49,6 @@ const GlobalState = (props) => {
       };
       const newCart = [...cart, setProduct];
       setCart(newCart);
-      // Setando alert na tela
       alertSuccess("Produto adicionado! 😀");
     }
   };
@@ -128,6 +127,19 @@ const GlobalState = (props) => {
         cartTotalPrice += (item.price * item.quantity)
     }
     setCartTotalPrice(cartTotalPrice)
+  }
+
+  // Função para verificar e atualizar a quantidade de produtos em um pedido caso seja possível 
+  const tryUpdateOrder = (productId, purchaseId, purchaseQtd, formQtd) => {
+    for (let item of stock) {
+      if (item.id === productId && item.qty_stock + purchaseQtd >= formQtd && formQtd > 0) {
+        updateOrder(purchaseId, formQtd)
+      }
+  
+      else if (item.id === productId && item.qty_stock + purchaseQtd < formQtd) {
+        alertError(`O quantidade máxima é de ${item.qty_stock + purchaseQtd}`)
+      }
+    }
   }
 
   // Requisição para mostrar todo estoque
@@ -234,7 +246,6 @@ const GlobalState = (props) => {
     postOrder,
     getUserOrder,
     deleteOrder,
-    updateOrder,
 
     // Funções
     alertSuccess,
@@ -243,8 +254,8 @@ const GlobalState = (props) => {
     addMoreProduct,
     removeMoreProduct,
     removeAllProduct,
-    sumTotalCart
-    
+    sumTotalCart,
+    tryUpdateOrder
   };
 
   return (
