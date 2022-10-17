@@ -5,7 +5,7 @@ import GlobalStateContext from "../../Global/GlobalStateContext";
 import useForm from "../../Hooks/useForm";
 
 const Orders = () => {
-  const { orders, getUserOrder, deleteOrder, updateOrder, alertError } = useContext(GlobalStateContext);
+  const { orders, getUserOrder, deleteOrder, alertError, tryUpdateOrder } = useContext(GlobalStateContext);
   const [form, onChange] = useForm({ name: "", qtd: "" });
 
   const ordersList = orders && orders.map((item) => {
@@ -21,7 +21,9 @@ const Orders = () => {
               name="qtd"
               onChange={onChange}
             />
-            <S.ButtonAtt onClick={() => form.qtd > 0 ? updateOrder(item.id_purchase, form.qtd) : alertError("Quantidade igual a 0")}>Atualizar</S.ButtonAtt>
+            <S.ButtonAtt onClick={() => form.qtd > 0 
+              ? tryUpdateOrder(item.id_product, item.id_purchase, item.qty_product, form.qtd) 
+              : alertError("Quantidade igual a 0")}>Atualizar</S.ButtonAtt>
           </S.ContainerAttQtd>
           <div>
             <S.ButtonCancel onClick={() => deleteOrder(item.id_purchase)}>Cancelar pedido</S.ButtonCancel>
