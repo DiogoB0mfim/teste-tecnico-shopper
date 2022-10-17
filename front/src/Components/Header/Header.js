@@ -4,6 +4,7 @@ import logoShopper from "../../Assets/logo-shopper.png";
 import imgCart from "../../Assets/cart-img.png";
 import stockIcon from "../../Assets/stock-icon.png";
 import orderIcon from "../../Assets/order-icon.png";
+import { goHome, goStock, goCart, goOrders } from "../../Router/Coordinator";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -14,22 +15,22 @@ const Header = () => {
         <S.ImgHeader
           src={logoShopper}
           alt="logo shopper"
-          onClick={() => navigate("/")}
+          onClick={() => goHome(navigate)}
         />
         <S.ContainerImgsheader>
           <S.CartImg
             src={stockIcon}
-            onClick={() => navigate("/stock")}
+            onClick={() => goStock(navigate)}
             alt="estoque"
           />
           <S.CartImg
             src={imgCart}
-            onClick={() => navigate("/cart")}
+            onClick={() => goCart(navigate)}
             alt="carrinho de compras"
           />
           <S.CartImg
             src={orderIcon}
-            onClick={() => navigate("/myOrders")}
+            onClick={() => goOrders(navigate)}
             alt="icone meus pedidos"
           />
         </S.ContainerImgsheader>
