@@ -1,5 +1,6 @@
 import BaseDatabase from "./BaseDatabase";
 import { Purchase } from "../models/purchase";
+import { generateId } from "../services/generateId";
 
 export class PurchaseDatabase extends BaseDatabase {
   public async getUserPurchase(userName: string) {
@@ -13,7 +14,7 @@ export class PurchaseDatabase extends BaseDatabase {
     for (let i = 0; i < products.length; i++) {
       // Adicionar compra a tabela de compras
       await BaseDatabase.connection("shopper_purchases").insert({
-        id_purchase: Date.now(),
+        id_purchase: generateId(),
         id_product: products[i].id_product,
         name_product: products[i].name_product,
         qty_product: products[i].qty_product,
