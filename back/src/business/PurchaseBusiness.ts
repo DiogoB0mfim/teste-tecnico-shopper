@@ -1,10 +1,11 @@
 import { PurchaseDatabase } from "../data/PurchaseDatabase";
 import { Purchase } from "../models/purchase";
+import { InvalidRequest } from "../error/InvalidRequests";
 
 export class PurchaseBusiness {
   async getUserPurchase(userName: string) {
     if (!userName) {
-      throw new Error("Insira um nome de usuário");
+      throw new InvalidRequest();
     } else {
       const purchaseDatabase = new PurchaseDatabase();
       const result = await purchaseDatabase.getUserPurchase(userName);
@@ -14,8 +15,8 @@ export class PurchaseBusiness {
   }
 
   async registerPurchase(products: Purchase[]) {
-    if (!products) {
-      throw new Error("Insira as informações de compra");
+    if (products.length === 0) {
+      throw new InvalidRequest();
     } else {
       const purchaseDatabase = new PurchaseDatabase();
       await purchaseDatabase.registerPurchase(products);
@@ -24,7 +25,7 @@ export class PurchaseBusiness {
 
   async updatePurchaseProduct(idPurchase: number, qtyProduct: number) {
     if (!idPurchase || !qtyProduct || qtyProduct === 0) {
-      throw new Error("Insira as informações corretamente");
+      throw new InvalidRequest();
     } else {
       const purchaseDatabase = new PurchaseDatabase();
       await purchaseDatabase.updatePurchaseProduct(idPurchase, qtyProduct);
@@ -33,7 +34,7 @@ export class PurchaseBusiness {
 
   async deleteOrderProduct(idPurchase: number) {
     if (!idPurchase) {
-      throw new Error("Insira as informações corretamente");
+      throw new InvalidRequest();
     } else {
       const purchaseDatabase = new PurchaseDatabase();
       await purchaseDatabase.deletePurchaseProduct(idPurchase);
