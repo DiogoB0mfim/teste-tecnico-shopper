@@ -1,7 +1,6 @@
 import { PurchaseDatabase } from "../data/PurchaseDatabase";
-import { Purchase } from "../models/purchase";
+import { Purchase } from "../types/purchase";
 import { InvalidRequest } from "../error/InvalidRequests";
-
 export class PurchaseBusiness {
   async getUserPurchase(userName: string) {
     if (!userName) {

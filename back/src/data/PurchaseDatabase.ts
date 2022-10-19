@@ -1,5 +1,5 @@
 import BaseDatabase from "./BaseDatabase";
-import { Purchase } from "../models/purchase";
+import { Purchase } from "../types/purchase";
 import { generateId } from "../services/generateId";
 
 export class PurchaseDatabase extends BaseDatabase {

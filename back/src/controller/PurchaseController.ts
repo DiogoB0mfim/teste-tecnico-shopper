@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 import { PurchaseBusiness } from "../business/PurchaseBusiness";
-import { Purchase } from "../models/purchase";
+import { Purchase } from "../types/purchase";
 
 const purchaseBusiness = new PurchaseBusiness();
-
 export class PurchaseController {
   async getUserPurchase(req: Request, res: Response) {
     try {

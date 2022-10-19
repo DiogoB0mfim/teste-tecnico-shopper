@@ -1,5 +1,4 @@
 import { StockDatabase } from "../data/StockDatabase";
-
 export class StockBusiness {
     async getStock() {
         const stockDatabase = new StockDatabase();
